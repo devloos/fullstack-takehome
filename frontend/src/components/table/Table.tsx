@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, } from 'react'
 import {
   createColumnHelper,
   flexRender,
@@ -38,13 +38,17 @@ const columns = [
   }),
 ];
 
-const TableContent = memo(() => {
+const TableContent = memo(({ searchValue }: { searchValue: string }) => {
   const { data: usersData, loading, error } = useQuery(GetUsersDocument, {
     variables: {
-      filters: {},
+      filters: {
+        name: {
+          contains: searchValue,
+        },
+      },
     },
   })
-  
+
   const data: GetUsersQuery['users'] = usersData?.users ?? []
   
   const table = useReactTable({
@@ -115,7 +119,7 @@ export const Table = () => {
         <TableFilters searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
 
-      <TableContent />
+      <TableContent searchValue={searchValue} />
     </div>
   )
 }
