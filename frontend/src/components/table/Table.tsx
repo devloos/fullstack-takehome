@@ -11,6 +11,7 @@ import { useState } from 'react'
 
 import { TableFilters } from './TableFilters'
 import { GenericCell } from './cells/GenericCell'
+import { LoadingSpinner } from '../LoadingSpinner'
 
 const columnHelper = createColumnHelper<GetUsersQuery['users'][0]>()
 
@@ -52,11 +53,11 @@ const TableContent = memo(() => {
     getCoreRowModel: getCoreRowModel(),
   })
   
-  if (loading) return <div className="p-4">Loading users...</div>
+  if (loading) return <div className="p-4"><LoadingSpinner /></div>
   if (error) return <div className="p-4 text-red-500">Error: {error.message}</div>
 
   return (
-    <table className="table-auto border-collapse border border-gray-300 ">
+    <table className="table-auto border-collapse border border-gray-300">
         <thead className="bg-gray-700">
           {table.getHeaderGroups().map(headerGroup => (
             <tr className="border-b border-gray-300" key={headerGroup.id}>
