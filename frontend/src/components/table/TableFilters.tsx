@@ -6,7 +6,7 @@ type TableFiltersProps = {
 export const TableFilters = ({ searchValue, setSearchValue }: TableFiltersProps) => {
     return (
         <div>
-            <input type="text" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+            <input className="border border-gray-300 rounded-xs px-2 py-1" type="text" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
         </div>
     )
 }

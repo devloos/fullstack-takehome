@@ -57,7 +57,7 @@ const TableContent = memo(() => {
   if (error) return <div className="p-4 text-red-500">Error: {error.message}</div>
 
   return (
-    <table className="table-auto border-collapse border border-gray-300">
+    <table className="border border-gray-300">
         <thead className="bg-gray-700">
           {table.getHeaderGroups().map(headerGroup => (
             <tr className="border-b border-gray-300" key={headerGroup.id}>
@@ -74,6 +74,7 @@ const TableContent = memo(() => {
             </tr>
           ))}
         </thead>
+
         <tbody>
           {table.getRowModel().rows.map(row => (
             <tr key={row.id}>
@@ -110,7 +111,10 @@ export const Table = () => {
 
   return (
     <div className="p-2">
-      <TableFilters searchValue={searchValue} setSearchValue={setSearchValue} />
+      <div className="pb-1">
+        <TableFilters searchValue={searchValue} setSearchValue={setSearchValue} />
+      </div>
+
       <TableContent />
     </div>
   )
