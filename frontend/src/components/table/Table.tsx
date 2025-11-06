@@ -12,6 +12,7 @@ import { useState } from 'react'
 import { TableFilters } from './TableFilters'
 import { GenericCell } from './cells/GenericCell'
 import { LoadingSpinner } from '../LoadingSpinner'
+import { PostDetails } from '../PostDetails'
 
 const columnHelper = createColumnHelper<GetUsersQuery['users'][0]>()
 
@@ -36,6 +37,10 @@ const columns = [
     header: "Phone",
     cell: ({ getValue }) => <GenericCell value={getValue()} />,
   }),
+  columnHelper.accessor("posts", {
+    header: "Posts",
+    cell: ({ getValue }) => <PostDetails posts={getValue()} />,
+  }), 
 ];
 
 const TableContent = memo(({ searchValue }: { searchValue: string }) => {
