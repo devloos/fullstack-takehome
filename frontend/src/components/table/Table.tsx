@@ -10,31 +10,32 @@ import { GetUsersDocument, type GetUsersQuery } from '../../__generated__/graphq
 import { useState } from 'react'
 
 import { TableFilters } from './TableFilters'
+import { GenericCell } from './cells/GenericCell'
 
 const columnHelper = createColumnHelper<GetUsersQuery['users'][0]>()
 
 const columns = [
-  columnHelper.accessor('id', {
-    header: 'ID',
-    cell: info => info.getValue(),
+  columnHelper.accessor("id", {
+    header: "ID",
+    cell: ({ getValue }) => <GenericCell value={getValue()} />,
   }),
-  columnHelper.accessor('name', {
-    header: 'Name',
-    cell: info => info.getValue(),
+  columnHelper.accessor("name", {
+    header: "Name",
+    cell: ({ getValue }) => <GenericCell value={getValue()} />,
   }),
-  columnHelper.accessor('age', {
-    header: 'Age',
-    cell: info => info.getValue(),
+  columnHelper.accessor("age", {
+    header: "Age",
+    cell: ({ getValue }) => <GenericCell value={getValue()} />,
   }),
-  columnHelper.accessor('email', {
-    header: 'Email',
-    cell: info => info.getValue(),
+  columnHelper.accessor("email", {
+    header: "Email",
+    cell: ({ getValue }) => <GenericCell value={getValue()} />,
   }),
-  columnHelper.accessor('phone', {
-    header: 'Phone',
-    cell: info => info.getValue(),
+  columnHelper.accessor("phone", {
+    header: "Phone",
+    cell: ({ getValue }) => <GenericCell value={getValue()} />,
   }),
-]
+];
 
 const TableContent = memo(() => {
   const { data: usersData, loading, error } = useQuery(GetUsersDocument, {
@@ -55,12 +56,12 @@ const TableContent = memo(() => {
   if (error) return <div className="p-4 text-red-500">Error: {error.message}</div>
 
   return (
-    <table>
-        <thead>
+    <table className="table-auto border-collapse border border-gray-300 ">
+        <thead className="bg-gray-700">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <tr className="border-b border-gray-300" key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id}>
+                <th className="px-2 py-1 text-white" key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -76,7 +77,7 @@ const TableContent = memo(() => {
           {table.getRowModel().rows.map(row => (
             <tr key={row.id}>
               {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
+                <td className="px-2 py-1 text-center" key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

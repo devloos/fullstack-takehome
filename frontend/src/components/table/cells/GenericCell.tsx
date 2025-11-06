@@ -1,7 +1,3 @@
-export const GenericCell = () => {
-    return (
-        <div>
-            GenericCell
-        </div>
-    )
+export function GenericCell<T>({ value }: { value: T }) {
+  return <div>{value?.toString()}</div>;
 }
