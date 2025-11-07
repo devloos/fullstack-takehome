@@ -11,6 +11,7 @@ export const GET_USERS = gql`
       posts {
         id
         title
+        content
       }
     }
   }
